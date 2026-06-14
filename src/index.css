@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   TAJ KAMAL — EDITORIAL EXECUTIVE THEME
+   Deep midnight navy + warm ivory + signature gold
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 222 40% 8%;          /* deep midnight navy */
+    --foreground: 38 30% 94%;          /* warm ivory */
+
+    --card: 222 38% 11%;
+    --card-foreground: 38 30% 94%;
+
+    --popover: 222 38% 11%;
+    --popover-foreground: 38 30% 94%;
+
+    /* Brand: warm signature gold */
+    --primary: 38 60% 58%;
+    --primary-foreground: 222 40% 8%;
+    --primary-glow: 42 78% 68%;
+
+    /* Secondary: muted slate */
+    --secondary: 222 28% 16%;
+    --secondary-foreground: 38 30% 94%;
+
+    --muted: 222 22% 18%;
+    --muted-foreground: 38 14% 70%;
+
+    /* Accent: deep teal-emerald (subtle, editorial) */
+    --accent: 168 45% 42%;
+    --accent-foreground: 38 30% 94%;
+
+    --destructive: 4 70% 56%;
+    --destructive-foreground: 38 30% 94%;
+
+    --border: 222 25% 20%;
+    --input: 222 25% 20%;
+    --ring: 38 60% 58%;
+
+    --radius: 0.5rem;
+
+    /* Editorial gradients & shadows */
+    --gradient-gold: linear-gradient(135deg, hsl(38 60% 58%), hsl(42 78% 68%));
+    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, hsl(38 60% 58% / 0.18), transparent 60%),
+                     radial-gradient(ellipse 60% 50% at 90% 100%, hsl(168 45% 42% / 0.15), transparent 60%),
+                     hsl(var(--background));
+    --gradient-card: linear-gradient(145deg, hsl(222 38% 13%), hsl(222 35% 9%));
+
+    --shadow-elegant: 0 20px 60px -20px hsl(222 60% 2% / 0.7), 0 0 0 1px hsl(var(--border));
+    --shadow-gold: 0 10px 40px -10px hsl(38 60% 58% / 0.35);
+    --shadow-soft: 0 4px 20px -8px hsl(222 60% 2% / 0.5);
+
+    --transition-smooth: cubic-bezier(0.32, 0.72, 0.24, 1);
+
+    --sidebar-background: 222 40% 8%;
+    --sidebar-foreground: 38 30% 94%;
+    --sidebar-primary: 38 60% 58%;
+    --sidebar-primary-foreground: 222 40% 8%;
+    --sidebar-accent: 222 28% 16%;
+    --sidebar-accent-foreground: 38 30% 94%;
+    --sidebar-border: 222 25% 20%;
+    --sidebar-ring: 38 60% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-feature-settings: 'ss01';
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--background)); }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--secondary)); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.5); }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Fraunces', Georgia, serif; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .text-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-hero { background: var(--gradient-hero); }
+  .bg-card-gradient { background: var(--gradient-card); }
+
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+
+  .transition-smooth { transition: all 0.5s var(--transition-smooth); }
+
+  /* Subtle grain texture */
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3CfeColorMatrix values='0 0 0 0 0.83 0 0 0 0 0.66 0 0 0 0 0.34 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s var(--transition-smooth), transform 0.9s var(--transition-smooth);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
